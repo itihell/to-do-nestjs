@@ -30,4 +30,11 @@ export class TaskService {
     this.task = this.task.map((item) => (item.id === id ? newTask : item));
     return newTask;
   }
+
+  delete(id: string): ITask {
+    const index = this.task.findIndex((item) => item.id === id);
+    const oldTask = this.task[index];
+    delete this.task[index];
+    return oldTask;
+  }
 }

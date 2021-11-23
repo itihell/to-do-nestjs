@@ -39,8 +39,8 @@ export class TaskController {
     return this.taskService.update(id, tasTDO);
   }
 
-  @Delete()
-  destroy(@Req() req: Request) {
-    return `method ${req.method}`;
+  @Delete(':id')
+  destroy(@Param('id') id: string) {
+    return this.taskService.delete(id);
   }
 }
