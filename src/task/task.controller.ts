@@ -1,8 +1,11 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -11,8 +14,11 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { rejects } from 'assert';
 import { timeStamp } from 'console';
 import { query, Request } from 'express';
+import { resolve } from 'path/posix';
+import { setTimeout } from 'timers';
 import { TaskDTO } from './dto/task.dto';
 import { TaskService } from './task.service';
 
@@ -29,7 +35,18 @@ export class TaskController {
   // Guardando una tarea
   @Post()
   store(@Body() taskDTO: TaskDTO) {
-    return this.taskService.create(taskDTO);
+    return new Promise((resolve, rejects) => {
+      setTimeout(() => rejects('Error en la petición'), 5000);
+    });
+    //throw new BadRequestException('Petición erronea');
+    // throw new HttpException(
+    //   'Error en la petición del servidor',
+    //   HttpStatus.BAD_REQUEST,
+    // );
+    // return new Promise((resolve, rejects) => {
+    //   setTimeout(() => rejects('Error en la petición'), 2000);
+    // });
+    //return this.taskService.create(taskDTO);
   }
 
   @Get(':id')
