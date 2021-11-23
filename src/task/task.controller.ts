@@ -35,9 +35,9 @@ export class TaskController {
   // Guardando una tarea
   @Post()
   store(@Body() taskDTO: TaskDTO) {
-    return new Promise((resolve, rejects) => {
-      setTimeout(() => rejects('Error en la petición'), 5000);
-    });
+    // return new Promise((resolve, rejects) => {
+    //   setTimeout(() => rejects('Error en la petición'), 5000);
+    // });
     //throw new BadRequestException('Petición erronea');
     // throw new HttpException(
     //   'Error en la petición del servidor',
@@ -46,7 +46,7 @@ export class TaskController {
     // return new Promise((resolve, rejects) => {
     //   setTimeout(() => rejects('Error en la petición'), 2000);
     // });
-    //return this.taskService.create(taskDTO);
+    return this.taskService.create(taskDTO);
   }
 
   @Get(':id')
