@@ -18,4 +18,16 @@ export class TaskService {
   findAll(): ITask[] {
     return this.task;
   }
+
+  findOne(id: string): ITask {
+    const index = this.task.findIndex((item) => item.id === id);
+    return this.task[index];
+  }
+
+  update(id: string, taskTDO: TaskDTO): ITask {
+    const newTask = { id, ...taskTDO };
+    console.log(id, taskTDO);
+    this.task = this.task.map((item) => (item.id === id ? newTask : item));
+    return newTask;
+  }
 }

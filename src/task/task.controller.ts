@@ -18,25 +18,25 @@ import { TaskService } from './task.service';
 export class TaskController {
   //Constructor
   constructor(private readonly taskService: TaskService) {}
-  // Enviando querys parametros
+  // Retornando todos las tareas
   @Get()
   index(@Query() query: any) {
     return this.taskService.findAll();
   }
 
-  // Parametros por url
+  // Guardando una tarea
   @Post()
   store(@Body() taskDTO: TaskDTO) {
     return this.taskService.create(taskDTO);
   }
 
-  @Get()
-  show(@Req() req: Request) {
-    return `method ${req.method}`;
+  @Get(':id')
+  show(@Param('id') id: string) {
+    return this.taskService.findOne(id);
   }
-  @Put()
-  update(@Req() req: Request) {
-    return `method ${req.method}`;
+  @Put(':id')
+  update(@Param('id') id: string, @Body() tasTDO: TaskDTO) {
+    return this.taskService.update(id, tasTDO);
   }
 
   @Delete()
