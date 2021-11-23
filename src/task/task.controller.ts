@@ -8,6 +8,8 @@ import {
   Put,
   Query,
   Req,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { timeStamp } from 'console';
 import { query, Request } from 'express';
@@ -26,6 +28,7 @@ export class TaskController {
 
   // Guardando una tarea
   @Post()
+  @UsePipes(new ValidationPipe())
   store(@Body() taskDTO: TaskDTO) {
     return this.taskService.create(taskDTO);
   }
